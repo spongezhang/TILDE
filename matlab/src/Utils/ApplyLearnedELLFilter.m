@@ -37,10 +37,9 @@
 %% Code:
 
 
-function [ binary_res, score_res_final ] = ApplyLearnedELLFilter( input_color_image, threshold, nameELLFilter, bDisp )
+function [ binary_res, score_res_final ] = ApplyLearnedELLFilter( input_color_image, threshold, res, bDisp )
 %% Load Filter
 param = 0;
-load(nameELLFilter);
 param = res.param;
 param = rmfield(param, 'fMultiScaleList');
 

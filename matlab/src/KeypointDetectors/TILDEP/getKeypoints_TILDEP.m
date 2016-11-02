@@ -48,17 +48,18 @@ function [keypts, score_res] = getKeypoints_TILDEP(img_info, p)
 
 
         name_our_orig = ['../filters/BestFilters' suffix '/Original/' trainset_name 'Med.mat'];
-
+        
         file_prefix = img_info.full_feature_prefix;
         file_suffix = ['_dump.mat'];
         filter_res_file_name = [file_prefix '_Train_' trainset_name '_Test_' testset_name file_suffix];        
-        
         brun_filter = ~exist(filter_res_file_name,'file');
         if(brun_filter)
-            [ binary_res, score_res ] = ApplyLearnedELLFilter(img_info.image_color, -inf,  name_our_orig, false );
+            detector = load(name_our_orig);
+            detector = detector.res;
+            [ binary_res, score_res ] = ApplyLearnedELLFilter(img_info.image_color, -inf,  detector, false );
             parsavefilter(filter_res_file_name, score_res, binary_res);
         else
-            display(' -- loaded dumped filter response');
+            %display(' -- loaded dumped filter response');
             loadres = load(filter_res_file_name);
             score_res = loadres.score_res;
             binary_res = loadres.binary_res;

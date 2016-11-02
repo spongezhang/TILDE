@@ -167,7 +167,7 @@ setenv('OMP_NUM_THREADS', p.omp_num_threads);
     for i_method = 1:nNumMethods
         if strcmpi(list_method{i_method}, 'SIFT')
             % SIFT sorted by score
-            features_sorted{1,idx_sorted_method} = sortFeaturesSS(features{i_method},pa);;
+            features_sorted{1,idx_sorted_method} = sortFeaturesSS(features{i_method},pa);
         else
             % Method sorted by score
             features_sorted{1,idx_sorted_method} = {};

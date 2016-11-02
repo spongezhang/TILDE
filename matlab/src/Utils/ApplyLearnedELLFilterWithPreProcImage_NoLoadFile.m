@@ -91,7 +91,8 @@ fs = param.nBinSize;
 % if isfield(param, 'ACFilter_list')
 %     cascade_safety = double(length(param.ACFilter_list));
 % end
-binary_res = max_img .* (score_res_final > threshold);
+%binary_res = max_img .* (score_res_final > threshold);
+binary_res = (score_res_final > 1e-10);
 % Mutiplied fs with param.fScaling to consider scaling (25/04/2014 KMYI)
 binary_res(1:fs,:) = 0;
 binary_res(end-fs+1:end,:) = 0;

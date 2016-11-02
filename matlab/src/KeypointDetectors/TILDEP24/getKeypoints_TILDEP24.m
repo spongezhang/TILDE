@@ -64,7 +64,7 @@ global sRoot;
             param = res.param;
             delta = res.delta; %backup old delta from previous res structure
             res = load([sRoot '/filters/' name_our_approx]);
-            % param = res.param;
+            %param = res.param;
             res.param = param;
             res.delta = delta;
             % res.newFilters = newFilters
@@ -88,7 +88,7 @@ global sRoot;
             binary_res(:,end-fs+1:end) = 0;
             parsavefilter(filter_res_file_name, score_res, binary_res);
         else
-            display(' -- loaded dumped filter response');
+            %display(' -- loaded dumped filter response');
             loadres = load(filter_res_file_name);
             score_res = loadres.score_res;
             binary_res = loadres.binary_res;

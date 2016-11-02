@@ -53,13 +53,13 @@ Img = imread(fullPathName);
 
 %%compute the keypoints and scores....
 [ binary_res, score ] = ApplyLearnedELLFilter(Img, -inf, fullPathFilter, false );   
- idx = find(binary_res);
+idx = find(binary_res);
 [I,J] = ind2sub(size(binary_res),idx);
 features = [J I zeros(size(I,1),3) repmat(fixed_scale,size(I,1),1)]';
 features = mergeScoreImg2Keypoints(features, score);
 
 %sort by score
-[~,idx] = sort(-features(5,:))
+[~,idx] = sort(-features(5,:));
 features = features(:,idx);
 %keep the 500 best
 features = features(:,1:min(size(features,2),500));
@@ -68,8 +68,8 @@ features = features(:,1:min(size(features,2),500));
 figure;
 imshow(Img);hold on;
 plot(features(1,:), features(2,:), 'b.');
-figure;
-imshow((score - min(min(score)))/((max(max(score))-min(min(score)))))
+%figure;
+%imshow((score - min(min(score)))/((max(max(score))-min(min(score)))))
 
 fprintf('Program terminated normally.\n');
 

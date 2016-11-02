@@ -71,7 +71,7 @@ function [score_img, binary_img] = ApplyNonMax2Score(score_img, param, bDoSimple
     basic_nonMax = bDoSimpleNonMax;
     if (basic_nonMax)
 %         score_img = max(score_img,0);
-        score_img = vl_imsmooth( score_img, 2.0);
+        %score_img = vl_imsmooth(score_img, 2);
         binary_img = zeros(size(score_img));
         binary_img(vl_localmax(double(score_img))) = 1;
 %         binary_img = score_img==imdilate(score_img,strel('square',3));

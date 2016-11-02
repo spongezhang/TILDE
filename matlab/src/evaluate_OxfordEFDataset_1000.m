@@ -44,9 +44,10 @@ sRoot = strjoin(tmp,'/');
 setup_path
 
 parameters.nameDataset = 'OxfordEF';%for saving at the end
-parameters.models = {'Chamonix'};
+parameters.models = {'Mexico'};
 parameters.optionalTildeSuffix = 'Standard';
-parameters.testsets = {'bark','bikes','boat','graf','leuven','trees','ubc', 'wall', 'notredame', 'obama', 'yosemite', 'paintedladies', 'rushmore'}; 
+%parameters.testsets = {'bark','bikes','boat','graf','leuven','trees','ubc', 'wall', 'notredame', 'obama', 'yosemite', 'paintedladies', 'rushmore'}; 
+parameters.testsets = {'bikes','bark', 'boat','graf','leuven','trees','ubc', 'wall' }; 
 parameters.numberOfKeypoints  = {1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000};
 parameters.repeatabilityType = 'OXFORD';
 
