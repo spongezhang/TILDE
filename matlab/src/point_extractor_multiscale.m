@@ -1,23 +1,23 @@
 clear variables; clc; close all;
-dataset_name = 'vggAffineDataset';
-subsets = { 'bikes', 'trees', 'graf', 'boat', 'bark', 'wall', 'leuven', 'ubc'};
-%subsets = {'trees'};
-%dataset_name = 'EFDataset';
-%subsets = {'notredame','obama','paintedladies','rushmore','yosemite'};
+%dataset_name = 'vggAffineDataset';
+%subsets = { 'bikes', 'trees', 'graf', 'boat', 'bark', 'wall', 'leuven', 'ubc'};
+%subsets = {'bikes'};
+% dataset_name = 'EFDataset';
+% subsets = {'notredame','obama','paintedladies','rushmore','yosemite'};
 dataset_name = 'WebcamDataset';
-subsets = {'Chamonix','Courbevoie','Frankfurt','Mexico','Panorama','StLouis'};
-%subsets = {'Chamonix'};
+%subsets = {'Chamonix','Courbevoie','Frankfurt','Mexico','Panorama','StLouis'};
+subsets = {'Mexico'};
 dir_name = ['/Users/Xu/program/Image_Genealogy/code/Covariant_Feature_Detection/eval/' ...
         'vlbenchmakrs/vlbenchmakrs-1.0-beta/data/'];
 
-fullPathFilter = '../filters/BestFilters_Standard/Original/ChamonixMed.mat';
-approxPathFilter = '../filters/BestFilters_Standard/Approx/ChamonixMed24.mat';
+fullPathFilter = '../filters/BestFilters_Standard/Original/MexicoMed.mat';
+approxPathFilter = '../filters/BestFilters_Standard/Approx/MexicoMed24.mat';
 addpath('Utils');
 global sRoot;
 tmp = mfilename('fullpath');tmp =  strsplit(tmp, '/');tmp= tmp(1:end-2);
 sRoot = strjoin(tmp,'/');
 setup_path;
-radius = 5;
+radius = 10;
 det_thres = -0.1;
 standard_circle = (0:1:10)';
 
@@ -30,12 +30,12 @@ detector.param = param;
 detector.delta = delta;
 
 pyramid_level = 1;
-point_number = 1000;
+point_number = 150;
 for set_index = 1:numel(subsets)
     subset = subsets{set_index};
     disp(set_index);
     image_list = load_image_list([dir_name 'datasets/' dataset_name '/'], subset);
-    [s, mess, messid] = mkdir([dir_name 'tilde_feature_point/' dataset_name '/' subset '/']);
+    [s, mess, messid] = mkdir([dir_name 'tilde_p24_feature_point/' dataset_name '/' subset '/']);
     for i = 1:numel(image_list)
         
         image = imread([dir_name 'datasets/' dataset_name '/' subset '/' image_list(i).name]);
@@ -72,8 +72,8 @@ for set_index = 1:numel(subsets)
             features = features(:,1:min(size(features,2),round(point_number/factor^2)));
 
             feature_t = zeros(6,size(features,2));
-            feature_t(1,:) = 5;
-            feature_t(5,:) = 5;
+            feature_t(1,:) = radius;
+            feature_t(5,:) = radius;
             feature_t(3,:) = features(1,:);
             feature_t(6,:) = features(2,:);
             feature_t = feature_t'*factor;
@@ -92,7 +92,7 @@ for set_index = 1:numel(subsets)
             factor = factor*sqrt(2);
         end
         disp(size(feature,1));
-        save([dir_name 'tilde_feature_point/' dataset_name '/' subset '/' image_list(i).name(1:end-4) '.mat'],'feature');
+        save([dir_name 'tilde_p24_feature_point/' dataset_name '/' subset '/' image_list(i).name(1:end-4) '.mat'],'feature');
     end
 end
 

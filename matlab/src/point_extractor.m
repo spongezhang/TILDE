@@ -1,7 +1,7 @@
 clear variables; clc; close all;
 dataset_name = 'vggAffineDataset';
-%subsets = { 'bikes', 'trees', 'graf',' boat', 'wall', 'leuven', 'ubc'};
-subsets = {'boat'};
+subsets = { 'bikes', 'trees', 'graf',' boat', 'wall', 'leuven', 'ubc'};
+%subsets = {'boat'};
 %dataset_name = 'EFDataset';
 %subsets = {'notredame','obama','paintedladies','rushmore','yosemite'};
 %dataset_name = 'WebcamDataset';

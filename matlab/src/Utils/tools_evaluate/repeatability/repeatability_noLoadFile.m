@@ -162,8 +162,6 @@ switch lower(repeatabilityType)
 			repeat = zeros(1,6);
 		end
 
-
-
 		% fprintf(1,'\noverlap error: ');
 		% fprintf(1,'%.1f ',erro);
 		% fprintf(1,'\nrepeatability: ');

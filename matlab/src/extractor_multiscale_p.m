@@ -1,16 +1,16 @@
 clear variables; clc; close all;
-%dataset_name = 'vggAffineDataset';
+dataset_name = 'vggAffineDataset';
 %subsets = { 'bikes', 'trees', 'graf', 'boat', 'bark', 'wall', 'leuven', 'ubc'};
-%subsets = {'boat'};
+subsets = {'trees'};
 %dataset_name = 'EFDataset';
 %subsets = {'notredame','obama','paintedladies','rushmore','yosemite'};
-dataset_name = 'WebcamDataset';
+%dataset_name = 'WebcamDataset';
 %subsets = {'Chamonix','Courbevoie','Frankfurt','Mexico','Panorama','StLouis'};
-subsets = {'Chamonix'};
+%subsets = {'notredame'};
 dir_name = ['/Users/Xu/program/Image_Genealogy/code/Covariant_Feature_Detection/eval/' ...
         'vlbenchmakrs/vlbenchmakrs-1.0-beta/data/'];
 
-fullPathFilter = '../filters/BestFilters_Standard/Original/ChamonixMed.mat';
+fullPathFilter = '../filters/BestFilters_Standard/Original/MexicoMed.mat';
 addpath('Utils');
 global sRoot;
 tmp = mfilename('fullpath');tmp =  strsplit(tmp, '/');tmp= tmp(1:end-2);
@@ -24,12 +24,12 @@ detector = load(fullPathFilter,'res');
 detector = detector.res;
 
 pyramid_level = 1;
-point_number = 200;
+point_number = 500;
 for set_index = 1:numel(subsets)
     subset = subsets{set_index};
     disp(set_index);
     image_list = load_image_list([dir_name 'datasets/' dataset_name '/'], subset);
-    [s, mess, messid] = mkdir([dir_name 'tilde_feature_point/' dataset_name '/' subset '/']);
+    [s, mess, messid] = mkdir([dir_name 'tilde_p_feature_point/' dataset_name '/' subset '/']);
     for i = 1:numel(image_list)
         
         image = imread([dir_name 'datasets/' dataset_name '/' subset '/' image_list(i).name]);
@@ -75,7 +75,7 @@ for set_index = 1:numel(subsets)
             factor = factor*sqrt(2);
         end
         disp(size(feature,1));
-        save([dir_name 'tilde_feature_point/' dataset_name '/' subset '/' image_list(i).name(1:end-4) '.mat'],'feature');
+        save([dir_name 'tilde_p_feature_point/' dataset_name '/' subset '/' image_list(i).name(1:end-4) '.mat'],'feature');
     end
 end
 
